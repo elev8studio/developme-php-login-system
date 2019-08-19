@@ -1,0 +1,9 @@
+create function that returns true or false if system should block ip address
+
+if ip had too many attempts in certain time period, block login page from loading with message 'better luck next time'
+
+if ip address not had too many attempts, load the form...
+
+if $_POST,
+
+check email address and number of login attempts (in case user changing ip address), then error message =- please wait 2 hours to try again 
