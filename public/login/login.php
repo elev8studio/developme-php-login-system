@@ -51,13 +51,15 @@ if ($_POST) {
                         // DEBUG: echo 'account not active';
                         $error_messages[] = "Your account has not been activated. Click here to resend activation email.";
                         // NOTE: regenerate activation code, update users database, and resnd activation email
-                    } elseif (password_verify($password, $database_entry['password'] )) {
+                    } elseif (password_verify($password, $database_entry['password'])) {
                         // ^^ verify password
                         // ^^ all user input matches database, proceed to login
                         // update status of login attempt to succeeded
-                        $login_successful = sprintf("UPDATE `login_attempts` SET `status` = '%s' WHERE `id` = %s;",
-                        mysqli_real_escape_string($db_connection, 'successful'),
-                        mysqli_real_escape_string($db_connection, $login_id));
+                        $login_successful = sprintf(
+                            "UPDATE `login_attempts` SET `status` = '%s' WHERE `id` = %s;",
+                            mysqli_real_escape_string($db_connection, 'successful'),
+                            mysqli_real_escape_string($db_connection, $login_id)
+                        );
 
                         $login_successful_result = mysqli_query($db_connection, $login_successful);
 
@@ -81,7 +83,6 @@ if ($_POST) {
                         $error = true;
                         $error_messages[] = 'Your email or password is incorrect. Please try again.';
                     }
-
                 } else {
                     // email NOT found in database
                     $error = true;
@@ -92,9 +93,8 @@ if ($_POST) {
                 $error_messages[] = "Uh oh, something's gone wrong. Please refresh the page and try again.";
             }
         }
-    // send email to user after login attempt
+        // send email to user after login attempt
     }
 }
 
-include('views/login.view.php')
-?>
+include('views/login.view.php');
